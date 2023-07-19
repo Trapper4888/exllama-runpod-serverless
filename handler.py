@@ -26,6 +26,8 @@ def load_model():
         # Create config, model, tokenizer and generator
         config = ExLlamaConfig(model_config_path)               # create config from config.json
         config.model_path = model_path                          # supply path to model weights file
+        config.max_seq_len = os.getenv("max_seq_len", "2048")
+        config.compress_pos_emb = os.getenv("compress_pos_emb", "1")
 
         model = ExLlama(config)                                 # create ExLlama instance and load the weights
         tokenizer = ExLlamaTokenizer(tokenizer_path)            # create tokenizer from tokenizer model file
